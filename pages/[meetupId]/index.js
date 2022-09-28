@@ -21,6 +21,13 @@ const MeetupDetail = (props) => {
 };
 
 export async function getStaticPaths() {
+	if (process.env.SKIP_BUILD_STATIC_GENERATION) {
+		return {
+			paths: [],
+			fallback: "blocking",
+		};
+	}
+
 	const client = await MongoClient.connect(
 		"mongodb+srv://sufyaankhateeb:kOgueYqrrtnGSOCb@nextjs-meetup-app.hcwmspv.mongodb.net/meetups?retryWrites=true&w=majority"
 	);
